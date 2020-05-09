@@ -7,60 +7,105 @@ public class CoffeeMachine {
     static int coffeBeanAvailable = 120;
     static int moneyAvailable = 550;
     static int cupsAvalible = 9;
+
     public static void main(String[] args) {
-         scanner = new Scanner(System.in);
 
-         print(watermlAvailable, milkmlAvailable, coffeBeanAvailable,cupsAvalible ,moneyAvailable);
-         System.out.println("Write action (buy, fill, take):");
-         String action = scanner.next();
-         switch (action){
-            case "buy" :
-                buy();
-                break;
-            case "fill" :
-                fill();
-                break;
-            case "take" :
-                take();
-                break;
-             default:
+         menu();
 
-         }
 
     }
+    static void menu() {
+        scanner = new Scanner(System.in);
+        String action ;
+        do{
+            System.out.println("Write action (buy, fill, take, remaining, exit):");
+            action = scanner.next();
+            switch (action){
+                case "buy" :
+                    buy();
+                    break;
+                case "fill" :
+                    fill();
+                    break;
+                case "take" :
+                    take();
+                    break;
+                case "remaining":
+                    print(watermlAvailable, milkmlAvailable, coffeBeanAvailable,cupsAvalible ,moneyAvailable);
+                    break;
+                case "exit":
+                    System.exit(0);
+                    break;
+
+                default:
+
+            }
+
+        } while (!action.equals("exit"));
+
+    }
+
     static void buy(){
-        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-        int buyop = scanner.nextInt();
+        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
+        String buyop = scanner.next();
         int water;
         int milk;
         int coffeBeans;
         int money;
         switch (buyop) {
-            case 1 :
+            case "1" :
                 water = 250;
                 coffeBeans = 16;
                 money = 4;
-                print(watermlAvailable - water, milkmlAvailable, coffeBeanAvailable - coffeBeans,cupsAvalible - 1,moneyAvailable + money);
+                if (watermlAvailable >= water && coffeBeanAvailable >= coffeBeans && cupsAvalible >= 1) {
+                    System.out.println("I have enough resources, making you a coffee!");
+                    watermlAvailable -= water;
+                    coffeBeanAvailable -= coffeBeans;
+                    moneyAvailable += money;
+                    cupsAvalible--;
+                } else {
+                    System.out.println("I can't make a cup of coffee");
+                }
                 break;
-            case 2:
+
+
+            case "2" :
                 water = 350;
                 milk = 75;
                 coffeBeans = 20;
                 money = 7;
-                print(watermlAvailable - water, milkmlAvailable - milk, coffeBeanAvailable - coffeBeans,cupsAvalible - 1,moneyAvailable + money);
+                buyCoffe(water, milk, coffeBeans, money);
                 break;
 
-            case 3 :
+            case "3" :
                 water = 200;
                 milk = 100;
                 coffeBeans = 12;
                 money = 6;
-                print(watermlAvailable - water, milkmlAvailable - milk, coffeBeanAvailable - coffeBeans,cupsAvalible - 1,moneyAvailable + money);
+                buyCoffe(water, milk, coffeBeans, money);
+                break;
+
+            case "back" :
+                menu();
                 break;
             default:
 
         }
     }
+
+    private static void buyCoffe(int water, int milk, int coffeBeans, int money) {
+        if (watermlAvailable >= water && milkmlAvailable >= milk && coffeBeanAvailable >= coffeBeans && cupsAvalible >= 1) {
+            System.out.println("I have enough resources, making you a coffee!");
+            watermlAvailable -= water;
+            milkmlAvailable -= milk;
+            coffeBeanAvailable -= coffeBeans;
+            moneyAvailable += money;
+            cupsAvalible--;
+        } else {
+            System.out.println("I can't make a cup of coffee");
+        }
+    }
+
     static void fill(){
         System.out.println("Write how many ml of water do you want to add:");
         int waterml = scanner.nextInt();
@@ -70,11 +115,14 @@ public class CoffeeMachine {
         int gramsCoffeBean = scanner.nextInt();
         System.out.println("Write how many disposable cups of coffee do you want to add:");
         int cups = scanner.nextInt();
-        print(watermlAvailable + waterml, milkmlAvailable + milkml, coffeBeanAvailable + gramsCoffeBean,cupsAvalible + cups,moneyAvailable);
+        watermlAvailable += waterml;
+        milkmlAvailable += milkml;
+        coffeBeanAvailable += gramsCoffeBean;
+        cupsAvalible += cups;
     }
     static void take() {
         System.out.println("I gave you $" + moneyAvailable);
-        print(watermlAvailable, milkmlAvailable, coffeBeanAvailable,cupsAvalible ,0);
+        moneyAvailable = 0;
     }
     static void print(int waterml, int milkml, int coffeBeansgrams, int cups, int money) {
         System.out.println("The coffee machine has:");
