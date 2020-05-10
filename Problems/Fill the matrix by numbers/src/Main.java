@@ -14,15 +14,15 @@ class Main {
 
             for (int j = 0; j < n; j++) {
                 if (i == j) {
-                    arr [i][j] = 0;
+                    arr[i][j] = 0;
                 } else {
                     if (i < j) {
-                        arr [i][j] = aux;
+                        arr[i][j] = aux;
                         aux++;
 
                     } else {
-                        arr [i][j] = line;
-                        line --;
+                        arr[i][j] = line;
+                        line--;
                     }
                 }
 
@@ -31,10 +31,10 @@ class Main {
 
         }
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++){
+            for (int j = 0; j < n; j++) {
                 System.out.print(arr[i][j] + " ");
             }
-            System.out.println("");
+            System.out.print("\n");
         }
 
     }
