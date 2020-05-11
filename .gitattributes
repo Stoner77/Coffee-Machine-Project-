@@ -1,0 +1,7 @@
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+*.html linguist-detectable=false
+*.java linguist-detectable=true
+*.htm linguist-detectable=false
+*.yaml linguist-detectable=false
+*.gradle linguist-detectable=false
