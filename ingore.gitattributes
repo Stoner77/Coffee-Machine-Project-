@@ -4,3 +4,4 @@
 *.java linguist-detectable=true
 *.htm linguist-detectable=false
 *.yaml linguist-detectable=false
+*.gradle linguist-detectable=false
